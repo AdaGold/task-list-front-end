@@ -20,7 +20,6 @@ const App = () => {
   console.log(tasks);
 
   const updateTask = (taskId) => {
-    console.log('Updating Task');
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
         task.done = !task.done;
@@ -43,7 +42,7 @@ const App = () => {
       <main>
         <div>
           <TaskList
-            tasks={TASKS}
+            tasks={tasks}
             onTaskClickCallback={updateTask}
             onTaskDeleteCallback={deleteTask}
           />
