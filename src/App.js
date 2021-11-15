@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import TaskList from './components/task_list';
+import TaskList from './components/TaskList';
 
 const TASKS = [
   {
