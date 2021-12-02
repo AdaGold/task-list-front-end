@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Task List React Livecode
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this livecode, we will be working with state & events in React.  Then we will use the `useEffect` hook to update state from an API and persist state to an API with events.
 
-## Available Scripts
+## Wave 1:  Lifting state up
 
-In the project directory, you can run:
+Currently our Task List app works, but has some limitations:
 
-### `yarn start`
+1.  We cannot remove tasks from the list.
+1.  If we mark a task complete and then hit refresh, the task will revert to it's initial state.
+1.  Data is stored in two places.  `App.js` has a list of tasks as a constant and each `Task` component stores it's own state.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+For the 1st part we will make `Task` a stateless component and store the state for the task app in `App.js`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### First State From Task.js
 
-### `yarn test`
+First we will remove state fromt he `Task` component and simply render the props.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Next Store State in `App`.
 
-### `yarn build`
+Next we will update `App.js` to store the list of task data in state.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Third Build Two Functions To Update And Remove A Task
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We can then build a function to update an individual task (toggling it's `done` field).  This function will need the `id` of the task to modify.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Then we can create a function which takes an id and removes that task from the array of tasks in state.
 
-### `yarn eject`
+### Fourth Pass The Functions As Props To TaskList And Task Components
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+We can then pass these functions as props through `TaskList` and into `Task` as props and call these callback functions when the user clicks on the buttons.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Wave 2:  useEffect And Axios
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Next we will add the [`axios`](https://github.com/axios/axios) library to our project.  We will use this library to make a request to our API to get the list of tasks.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+When the user deletes or updates a task we will make calls to the API to update the list of tasks.
 
-## Learn More
+### API EndPoints:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The API is active on Heroku at [`https://adas-task-list.herokuapp.com`](https://adas-task-list.herokuapp.com).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Verb  | Path  | Body of Request | What it does  |
+|---|---|---|
+| `GET`  | `/tasks`  | None | Retrieves a list of tasks  |
+| `PATCH`  | `/tasks/<task_id>/complete`  | None  | Marks a task complete   |
+| `PATCH`  | `/tasks/<task_id>/incomplete`  | None  | Marks a task incomplete   |
+| `POST`  | `/tasks`  | `{ title: titleText, completed_at: (date or null), : description: '' }`  | Marks a task incomplete   |
+| `DELETE`  | `/tasks/<task_id>`  | None  | Deletes a task |
 
-### Code Splitting
+### Make Axios requests in `App.js`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+We will:
 
-### Analyzing the Bundle Size
+- use the `useEffect` hook to make an API call to get the list of tasks initially.
+- update the callback functions to allow us to delete or update tasks.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Wave 3: Adding a Form
 
-### Making a Progressive Web App
+In this lesson we will add a new component to our App.  `TaskForm`.  In this component users will be able to add a new task to the list, persisting the data to the API.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
