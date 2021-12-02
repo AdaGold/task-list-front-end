@@ -26,6 +26,7 @@
   "root": true,
   "rules": {
     "max-len": [1, 120, 2, { "ignoreComments": true }],
+    "jsx-a11y/no-onchange": "off",
     "no-console": "off",
     "quotes": ["warn", "single", { "avoidEscape": true }],
     "camelcase": ["error", { "properties": "always" }],
