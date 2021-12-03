@@ -41,7 +41,7 @@ When the user deletes or updates a task we will make calls to the API to update 
 The API is active on Heroku at [`https://adas-task-list.herokuapp.com`](https://adas-task-list.herokuapp.com).
 
 | Verb  | Path  | Body of Request | What it does  |
-|---|---|---|
+|---|---|---|---|
 | `GET`  | `/tasks`  | None | Retrieves a list of tasks  |
 | `PATCH`  | `/tasks/<task_id>/complete`  | None  | Marks a task complete   |
 | `PATCH`  | `/tasks/<task_id>/incomplete`  | None  | Marks a task incomplete   |
