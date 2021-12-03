@@ -2,6 +2,15 @@
 
 In this livecode, we will be working with state & events in React.  Then we will use the `useEffect` hook to update state from an API and persist state to an API with events.
 
+## Learning Goals
+
+The goals of this live code are to:
+
+- Gain an ability to use State in a React component and pass information to other components via props
+- Use the `useEffect` hook to update state after the component first mounts
+- Use `axios` to make API calls to update state
+- Write controlled form components
+
 ## Wave 1:  Lifting state up
 
 Currently our Task List app works, but has some limitations:
