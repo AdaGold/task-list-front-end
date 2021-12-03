@@ -59,3 +59,6 @@ We will:
 
 In this lesson we will add a new component to our App.  `TaskForm`.  In this component users will be able to add a new task to the list, persisting the data to the API.
 
+## Notes on Tests
+
+We have added tests to the project for students to investigate at their own dicretion.  They are not required to understand or learn about lifting state, useEffect, APIs or controlled forms.
