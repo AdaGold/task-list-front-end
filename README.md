@@ -54,7 +54,7 @@ The API is active on Heroku at [`https://adas-task-list.herokuapp.com`](https://
 | `GET`  | `/tasks`  | None | Retrieves a list of tasks  |
 | `PATCH`  | `/tasks/<task_id>/complete`  | None  | Marks a task complete   |
 | `PATCH`  | `/tasks/<task_id>/incomplete`  | None  | Marks a task incomplete   |
-| `POST`  | `/tasks`  | `{ title: titleText, completed_at: (date or null), description: '' }`  | Marks a task incomplete   |
+| `POST`  | `/tasks`  | `{ title: titleText, completed_at: (date or null), description: '' }`  | Creates a new Task   |
 | `DELETE`  | `/tasks/<task_id>`  | None  | Deletes a task |
 
 ### Make Axios requests in `App.js`
