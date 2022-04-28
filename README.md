@@ -11,7 +11,11 @@ The goals of this live code are to:
 - Use `axios` to make API calls to update state
 - Write controlled form components
 
-## Wave 1:  Lifting state up
+## Part 1
+
+### Wave 01: Components and Props
+### Wave 02: State and Event Handling
+### Wave 03:  Lifting state up
 
 Currently our Task List app works, but has some limitations:
 
@@ -39,7 +43,9 @@ Then we can create a function which takes an id and removes that task from the a
 
 We can then pass these functions as props through `TaskList` and into `Task` as props and call these callback functions when the user clicks on the buttons.
 
-## Wave 2:  useEffect And Axios
+## Part 2
+
+### Wave 4:  useEffect And Axios
 
 Next we will add the [`axios`](https://github.com/axios/axios) library to our project.  We will use this library to make a request to our API to get the list of tasks.
 
@@ -64,7 +70,7 @@ We will:
 - use the `useEffect` hook to make an API call to get the list of tasks initially.
 - update the callback functions to allow us to delete or update tasks.
 
-## Wave 3: Adding a Form
+## Wave 5: Adding a Form
 
 In this lesson we will add a new component to our App.  `TaskForm`.  In this component users will be able to add a new task to the list, persisting the data to the API.
 
