@@ -10,7 +10,7 @@ For the 1st part we will make `Task` a stateless component and store the state f
 
 ### First State From Task.js
 
-First we will remove state fromt he `Task` component and simply render the props.
+First we will remove state from the `Task` component and simply render the props.
 
 ### Next Store State in `App`.
 
