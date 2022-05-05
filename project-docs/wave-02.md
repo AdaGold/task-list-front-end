@@ -1,5 +1,9 @@
 # Wave 02: State and Event Handling
 
-## Mark Complete and Incomplete
+In this wave we will add functionality to the `Task` component to handle click events and mark tasks complete and incomplete.
 
-When a user clicks the title
+## Toggle `done` 
+
+Add an `onClick` 
+
+

@@ -1,6 +1,6 @@
-# Wave 01: Rending `Task` and `TaskList`
+# Wave 01: Setup, Components, and Props
 
-In this wave, fulfill the following requirements:
+In this wave, we will complete the `TaskList` and `Task` components to render a list of tasks:
 
 ## `App`
 The `App` component holds the list of task objects in `TASKS`. 
@@ -15,7 +15,7 @@ The `TaskList` component should render the `Task` components for each of the tas
 The `Task` component should display the task title and the status of the task (complete or incomplete).
     - The functionality of marking a task complete/incomplete will be handled in Wave 02.
 
-The `Task` should also hold as `id`. The `id` does not need to be rendered, but it will be used when handling events.
+The `Task` should also hold an `id`. The `id` does not need to be rendered, but it will be used when handling events in later waves.
 
 ## Hints
 Use PropTypes to help determine the required props for each component. In particular, check `Task`.
