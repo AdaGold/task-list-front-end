@@ -21,8 +21,7 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>          
-        </div>
+        <div>Render TaskList</div>
       </main>
     </div>
   );
