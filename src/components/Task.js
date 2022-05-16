@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './Task.css';
 
@@ -17,14 +15,7 @@ const Task = ({ id, text, done }) => {
       >
         {text}
       </button>
-      <button
-        className="tasks__item__remove button alert pull-right"
-        data-testid={`delete button ${id}`}
-      >
-        <i className="fa fa-times">
-          <FontAwesomeIcon icon={faTimes} />
-        </i>
-      </button>
+      <button className="tasks__item__remove button">x</button>
     </li>
   );
 };
