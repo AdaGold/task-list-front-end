@@ -13,9 +13,9 @@ The goals of this pair project are to:
 
 ## Project Directions
 
-- Part 1: Components, Props, and State
-    - [Wave 01: Components, Props, Event Handling](./project-docs/wave-01.md)
-    - [Wave 02:  Lifting state up](./project-docs/wave-02.md)
+- Part 1: Components, Props, Event Handling, and State
+    - [Wave 01: Setup and Baseline](./project-docs/wave-01.md)
+    - [Wave 02:  Lifting Up State](./project-docs/wave-02.md)
 - Part 2: Connecting to the Task List API
     - [Wave 03:  useEffect And Axios](./project-docs/wave-03.md)
     - [Wave 04: Adding a Form](./project-docs/wave-04.md)
