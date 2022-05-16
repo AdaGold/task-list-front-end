@@ -10,6 +10,9 @@ The goals of this pair project are to:
 - Use `axios` to make API calls to update state
 - Write controlled form components
 
+
+## Project Directions
+
 - Part 1: Components, Props, and State
     - [Wave 01: Components, Props, Event Handling](./project-docs/wave-01.md)
     - [Wave 02:  Lifting state up](./project-docs/wave-02.md)
