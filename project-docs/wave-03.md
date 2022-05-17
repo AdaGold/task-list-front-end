@@ -12,9 +12,13 @@ Create or refactor the following features to connect the Task List Front End to 
 - Update the `toggleCompleteTask` callback function (the function that toggles the state of completion; it may have different name) in the `App` such that marking a task complete or incomplete in the front end makes a change to the state of the task in the database. 
 - Update the `deleteTask` callback function (the function that deletes a task; it may have a different name) in the `App` such that deleting a task in the front end, deletes the task from the database. 
 
+<!-- ## CORS and HTTP vs HTTP -->
+
+<!-- TODO: Add section about CORS -->
+
 ## API Endpoints:
 
-The API is active on Heroku at [`https://task-list-api-c17.herokuapp.com`](https://task-list-api-c17.herokuapp.com).
+The API is active on Heroku at [`http://task-list-api-c17.herokuapp.com`](https://task-list-api-c17.herokuapp.com).
 
 The source code for this Task List API is available on the [`c17/solution` branch](https://github.com/adagold/task-list-api/tree/c17/solution)
 
