@@ -14,11 +14,13 @@ Create or refactor the following features to connect the Task List Front End to 
 
 ## API Endpoints:
 
-The API is active on Heroku at [`https://task-list-api-c17.herokuapp.com`](https://task-list-api-c17.herokuapp.com).
+There is an API active on Heroku at [`https://task-list-api-c17.herokuapp.com`](https://task-list-api-c17.herokuapp.com).
 
 The source code for this Task List API is available on the [`c17/solution` branch](https://github.com/adagold/task-list-api/tree/c17/solution)
 
 Detailed specifications for the Task List API can be reviewed in the [Task List API README](https://github.com/adagold/task-list-api/)
+
+You may also use your deployed version of Task List API. If you are using your own Task List API, you will need to update it to handle CORS (see below).
 
 We can see a summary of the API endpoints that we will work with for the front end features below:
 
@@ -33,4 +35,22 @@ We can see a summary of the API endpoints that we will work with for the front e
 ### Cross-Origin Resource Sharing (CORS)
 
 The deployed Task List API uses the package [`flask-cors`](https://flask-cors.readthedocs.io/en/latest/) to handle Cross Origin Resource Sharing.
+
+The `__init__.py` file uses the `flask-cors` package as viewed [here](https://github.com/AdaGold/task-list-api/blob/c17/solution/app/__init__.py)
+
+<details>
+  <summary>Expand this section to see the updates to <code>__init__.py</code> with <code>flask-cors</code></summary>
+  
+```python
+from flask_cors import CORS
+  
+...
+  
+def create_app(test_config=None):
+    app = Flask(__name__)
+    CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
+  
+  ...
+```
 
