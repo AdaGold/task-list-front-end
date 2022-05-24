@@ -38,10 +38,12 @@ The deployed Task List API uses the package [`flask-cors`](https://flask-cors.re
 
 The `__init__.py` file uses the `flask-cors` package as viewed [here](https://github.com/AdaGold/task-list-api/blob/c17/solution/app/__init__.py)
 
-<details>
-  <summary>Expand this section to see the updates to <code>__init__.py</code> with <code>flask-cors</code></summary>
+If you would like to use your Task List API with this project, you will need to make the changes for `flask-cors` in the example below and re-deploy your Task List backend with the updates.
+
   
 ```python
+# __init__.py
+
 from flask_cors import CORS
   
 ...
@@ -53,4 +55,6 @@ def create_app(test_config=None):
   
   ...
 ```
+
+
 
