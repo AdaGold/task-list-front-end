@@ -9,8 +9,8 @@ When the user deletes or updates a task we will make calls to the API to update 
 Create or refactor the following features to connect the Task List Front End to the Task List Back End (Task List API)
 
 - In the `App`, use the `useEffect` hook to make an API call to get the list of tasks from the database when the React app is loaded.
-- Update the `toggleCompleteTask` callback function (the function that toggles the state of completion; it may have different name) in the `App` such that marking a task complete or incomplete in the front end makes a change to the state of the task in the database. 
-- Update the `deleteTask` callback function (the function that deletes a task; it may have a different name) in the `App` such that deleting a task in the front end, deletes the task from the database. 
+- Update the `toggleCompleteTask` callback function (the function that toggles the state of completion; you may have named it something different) in the `App` such that marking a task complete or incomplete in the front end makes a change to the state of the task in the database. 
+- Update the `deleteTask` callback function (the function that deletes a task; you may have named it something different) in the `App` such that deleting a task in the front end deletes the task from the database. 
 
 ## API Endpoints:
 

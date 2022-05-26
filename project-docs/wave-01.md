@@ -25,7 +25,9 @@ Read through the code in `App.js`, `TaskList.js` and `Task.js` and their style s
 1. What `props` does `TaskList` have? Where do they come from?
 1. Where is the function `getTaskListJSX` called in `TaskList`?
     - How would the code change without this helper function?
-1. Where are the `TASKS` passed through `TaskList`'s `tasks` prop defined in `App`.
+1. What component is `TASKS` passed to in `App`?
+    - How does the component pass `TASKS`?
+    - What element is the component wrapped in?
 
 The suggestions above should give you a strong foundation for working with Task List Front End. As time allows, follow your curiosity to explore more of the code and features.
 
