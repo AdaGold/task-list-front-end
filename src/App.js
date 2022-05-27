@@ -5,13 +5,13 @@ import './App.css';
 const TASKS = [
   {
     id: 1,
-    text: 'Mow the lawn',
-    done: false,
+    title: 'Mow the lawn',
+    isComplete: false,
   },
   {
     id: 2,
-    text: 'Cook Pasta',
-    done: true,
+    title: 'Cook Pasta',
+    isComplete: true,
   },
 ];
 

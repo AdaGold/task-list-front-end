@@ -6,13 +6,13 @@ describe('TaskList Renders', () => {
   const tasks = [
     {
       id: 1,
-      text: 'task one',
-      done: false,
+      title: 'task one',
+      isComplete: false,
     },
     {
       id: 42,
-      text: 'task 2',
-      done: true,
+      title: 'task 2',
+      isComplete: true,
     },
   ];
 
