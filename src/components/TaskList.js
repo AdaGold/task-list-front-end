@@ -7,7 +7,12 @@ const TaskList = ({ tasks }) => {
   const getTaskListJSX = (tasks) => {
     return tasks.map((task) => {
       return (
-        <Task key={task.id} id={task.id} text={task.text} done={task.done} />
+        <Task
+          key={task.id}
+          id={task.id}
+          title={task.title}
+          isComplete={task.isComplete}
+        />
       );
     });
   };
@@ -18,8 +23,8 @@ TaskList.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-      done: PropTypes.bool.isRequired,
+      title: PropTypes.string.isRequired,
+      isComplete: PropTypes.bool.isRequired,
     })
   ).isRequired,
 };

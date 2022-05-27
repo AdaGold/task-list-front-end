@@ -1,17 +1,17 @@
 import React from 'react';
+import TaskList from './components/TaskList.js';
 import './App.css';
-import TaskList from './components/TaskList';
 
 const TASKS = [
   {
     id: 1,
-    text: 'Mow the lawn',
-    done: false,
+    title: 'Mow the lawn',
+    isComplete: false,
   },
   {
     id: 2,
-    text: 'Cook Pasta',
-    done: true,
+    title: 'Cook Pasta',
+    isComplete: true,
   },
 ];
 
@@ -22,9 +22,7 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>
-          <TaskList tasks={TASKS} />
-        </div>
+        <div>{<TaskList tasks={TASKS} />}</div>
       </main>
     </div>
   );
