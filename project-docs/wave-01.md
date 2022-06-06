@@ -1,5 +1,7 @@
 # Wave 01: Setup and Baseline
 
+**Learn Topics: React Components, Props, and State & Event Handling required for this wave**
+
 ## Setup
 
 Use the following steps to get started:
