@@ -1,5 +1,7 @@
 # Wave 02:  Lifting Up State
 
+**Learn Topics: Lifting State Up required for this wave**
+
 In Wave 02 we will update the Task List Front End to store state in the `App`. 
 
 Lifting up state will set us up to connect our front end to our back end API. 
