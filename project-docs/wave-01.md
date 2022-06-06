@@ -21,7 +21,6 @@ Read through the code in `App.js`, `TaskList.js` and `Task.js` and their style s
     - Consider making this change and the subsequent necessary changes through the rest of the component to deepen your understanding of the code.
 1. How is the ~~strikethrough~~ style applied when the task title is clicked?
     - Consider updating the appropriate rule sets to change the text or background color when a task is marked complete.
-1. 
 1. What `props` does `TaskList` have? Where do they come from?
 1. Where is the function `getTaskListJSX` called in `TaskList`?
     - How would the code change without this helper function?
