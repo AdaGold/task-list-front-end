@@ -22,7 +22,9 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>{<TaskList tasks={TASKS} />}</div>
+        <div>
+          <TaskList tasks={TASKS} />
+        </div>
       </main>
     </div>
   );
