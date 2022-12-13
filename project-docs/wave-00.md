@@ -8,8 +8,6 @@ Use the following steps to get started:
 
 1. One team member should fork and clone the repository.
 1. Add other team member(s) as collaborators in GitHub
-1. Run `yarn install` to install dependencies.
-1. Run `yarn start` to run the local development server.
 
 ## Baseline
 
