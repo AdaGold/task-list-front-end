@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Task from './Task';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('Task', () => {
   test('Renders title content', () => {
