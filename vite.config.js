@@ -7,6 +7,7 @@ export default defineConfig({
   test: {
     reporters: ['verbose'],
     environments: ['jsdom'],
-    globals: true
+    globals: true,
+    setupFiles: ['./vitest.setup.js']
   }
 })
