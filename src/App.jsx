@@ -5,7 +5,7 @@ import axios from 'axios';
 import NewTaskForm from './components/NewTaskForm.jsx';
 
 // read the base url from the .env file
-const kBaseUrl = process.env['REACT_APP_BASE_URL'];
+const kBaseUrl = import.meta.env.VITE_BASE_URL;
 // const kBaseUrl = 'http://localhost:5000';
 
 
