@@ -4,7 +4,10 @@ import './App.css';
 import axios from 'axios';
 import NewTaskForm from './components/NewTaskForm.jsx';
 
-const kBaseUrl = 'http://localhost:5000';
+// read the base url from the .env file
+const kBaseUrl = process.env['REACT_APP_BASE_URL'];
+// const kBaseUrl = 'http://localhost:5000';
+
 
 const taskApiToJson = task => {
   // unpack the fields of a task, renaming is_complete to isComplete in the 
