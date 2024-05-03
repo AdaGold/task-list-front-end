@@ -38,7 +38,7 @@ const getTasksAsync = async () => {
     // throw a simplified error
     throw new Error('error fetching tasks');
   }
-  };
+};
 
 // helper function to mark a task complete or incomplete. To do so, we need
 // to know the id of the task being modified, as well as whether we are
@@ -77,7 +77,6 @@ const deleteTaskAsync = async id => {
     throw new Error(`error deleting task ${id}`);
   }
 };
-
 
 const addTaskAsync = async taskData => {
   // extract values from taskData
@@ -142,7 +141,6 @@ const App = () => {
     // start the async task to toggle the completion
     try {
       const newTask = await updateTaskAsync(id, !task.isComplete);
-
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       setTasks(oldTasks => {
@@ -163,6 +161,7 @@ const App = () => {
     }
   };
 
+
   // use our helper to asynchronously delete the specified task, then
   // chain a callback to set our tasks state once a successful result is
   // returned. Notice that the input to the .then is empty, since we didn't
@@ -172,7 +171,7 @@ const App = () => {
   const deleteTask = async id => {
     try {
       await deleteTaskAsync(id);
-
+      
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       setTasks(oldTasks => {
