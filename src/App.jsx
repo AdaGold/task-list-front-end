@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TaskList from './components/TaskList.jsx';
 import './App.css';
-import tasksJson from './tasks.json';
+import tasksJson from './data/tasks.json';
 
 const TASKS = [
   {
