@@ -4,7 +4,9 @@ import './App.css';
 import axios from 'axios';
 import NewTaskForm from './components/NewTaskForm.jsx';
 
-const kBaseUrl = 'http://localhost:5000';
+// read the base url from the .env file
+const kBaseUrl = import.meta.env.VITE_BASE_URL;
+// const kBaseUrl = 'http://localhost:5000';
 
 const taskApiToJson = task => {
   // unpack the fields of a task, renaming is_complete to isComplete in the 
@@ -21,25 +23,22 @@ const taskApiToJson = task => {
 // be sure to return the final promise, so that the component can add additional
 // then/catch clauses to update its state or do any additional error handling
 
-const getTasksAsync = () => {
-  // return the end of the promise chain to allow further then/catch calls
-  return axios.get(`${kBaseUrl}/tasks`)
-  .then(response => {
+const getTasksAsync = async () => {
+  try {
+    const response = await axios.get(`${kBaseUrl}/tasks`);
+
     // convert the received tasks from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson) that will be run on each task
     // in the result.
-
-    // the value we return from a then will become the input to the next then
     return response.data.map(taskApiToJson);
-  })
-  .catch(err => {
+
+  } catch (err) {
     console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
+    // throw a simplified error
     throw new Error('error fetching tasks');
-  });
-};
+  }
+  };
 
 // helper function to mark a task complete or incomplete. To do so, we need
 // to know the id of the task being modified, as well as whether we are
@@ -47,46 +46,40 @@ const getTasksAsync = () => {
 // endpoint to use (since marking complete and incomplete are two different
 // endpoints in task-list).
 
-const updateTaskAsync = (id, markComplete) => {
+const updateTaskAsync = async (id, markComplete) => {
   const endpoint = markComplete ? 'mark_complete' : 'mark_incomplete';
 
-  // return the end of the promise chain to allow further then/catch calls
-  return axios.patch(`${kBaseUrl}/tasks/${id}/${endpoint}`)
-  .then(response => {
+  try {
+    const response = await axios.patch(`${kBaseUrl}/tasks/${id}/${endpoint}`);
+
     // convert the received task from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson)
-
-    // the value we return from a then will become the input to the next then
     return taskApiToJson(response.data.task);
-  })
-  .catch(err => {
+
+  } catch (err) {
     console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
+    // throw a simplified error
     throw new Error(`error updating task ${id}`);
-  });
+  }
 };
 
 // helper function to delete a task. This function makes the asynchronous API
 // call using axios to delete the specified task.
 
-const deleteTaskAsync = id => {
-  // return the end of the promise chain to allow further then/catch calls
-  // note no .then here since there's nothing useful for us to process from the
-  // response. it returns a status message structure:
-  // { "details": "Task 3 \"do the other thing\" successfully deleted" }
-  return axios.delete(`${kBaseUrl}/tasks/${id}`)
-  .catch(err => {
+const deleteTaskAsync = async id => {
+  try {
+    await axios.delete(`${kBaseUrl}/tasks/${id}`);
+  } catch (err) {
     console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
+    // throw a simplified error
     throw new Error(`error deleting task ${id}`);
-  });
+  }
 };
 
-const addTaskAsync = (taskData) => {
+
+const addTaskAsync = async taskData => {
   // extract values from taskData
   const { title, isComplete } = taskData;
 
@@ -98,22 +91,19 @@ const addTaskAsync = (taskData) => {
   // yell at us
   const body = { title, description, 'completed_at': completedAt };
 
-  // return the end of the promise chain to allow further then/catch calls
-  return axios.post(`${kBaseUrl}/tasks`, body)
-  .then(response => {
+  try {
+    const response = await axios.post(`${kBaseUrl}/tasks`, body);
+
     // convert the received task from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson)
-
-    // the value we return from a then will become the input to the next then
     return taskApiToJson(response.data.task);
-  })
-  .catch(err => {
+
+  } catch (err) {
     console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
+    // throw a simplified error
     throw new Error('error creating task');
-  });
+  }
 };
 
 const App = () => {
@@ -127,14 +117,13 @@ const App = () => {
   // use our helper to get the asynchronous list of tasks from axios, then
   // chain a callback to set our tasks state once we have the result
 
-  const refreshTasks = () => {
-    return getTasksAsync()
-    .then((tasks) => {
+  const refreshTasks = async () => {
+    try {
+      const tasks = await getTasksAsync();
       setTasks(tasks);
-    })
-    .catch(err => {
+    } catch (err) {
       console.log(err.message);
-    });
+    }
   };
 
   // use our helper to asynchronously update the specified task, then
@@ -143,17 +132,17 @@ const App = () => {
   // corresponding to our update with the task value we got back from our
   // helper.
 
-  const updateTask = id => {
+  const updateTask = async id => {
     // find the task we want to update
     const task = tasks.find(task => task.id === id);
 
-    // If we didn't find the task for some reason, just return an empty promise
-    // to maintain type compatibility with the main code flow.
-    if (!task) { return Promise.resolve(); }
+    // If we didn't find the task for some reason, just return
+    if (!task) { return; }
 
     // start the async task to toggle the completion
-    return updateTaskAsync(id, !task.isComplete)
-    .then(newTask => {
+    try {
+      const newTask = await updateTaskAsync(id, !task.isComplete);
+
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       setTasks(oldTasks => {
@@ -169,10 +158,9 @@ const App = () => {
           }
         });
       });
-    })
-    .catch(err => {
+    } catch (err) {
       console.log(err.message);
-    });
+    }
   };
 
   // use our helper to asynchronously delete the specified task, then
@@ -181,32 +169,32 @@ const App = () => {
   // return anything from the .then of the helper. But if an error had
   // occurred, the code would jump over the .then and run the .catch instead
 
-  const deleteTask = id => {
-    return deleteTaskAsync(id)
-    .then(() => {
+  const deleteTask = async id => {
+    try {
+      await deleteTaskAsync(id);
+
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       setTasks(oldTasks => {
         // return the new value for the tasks state
         return oldTasks.filter(task => task.id !== id);
       });
-    })
-    .catch(err => {
+    } catch (err) {
       console.log(err.message);
-    });
+    }
   };
 
-  const addTask = taskData => {
-    return addTaskAsync(taskData)
-    .then(task => {
+  const addTask = async taskData => {
+    try {
+      const task = await addTaskAsync(taskData);
+
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       // this is very short, so we can use the implied return arrow function
       setTasks(oldTasks => [ ...oldTasks, task ]);
-    })
-    .catch(err => {
+    } catch (err) {
       console.log(err.message);
-    });
+    }
   };
 
   return (
