@@ -100,7 +100,7 @@ const App = () => {
 
   const refreshTasks = async () => {
     try {
-      const tasks = await getTasksAsync()
+      const tasks = await getTasksAsync();
       setTasks(tasks);
     } catch (err) {
       console.log(err.message);
