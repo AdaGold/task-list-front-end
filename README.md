@@ -14,6 +14,7 @@ The goals of this pair project are to:
 ## Project Directions
 
 - Part 1: React Components, Props, State and Event Handling
+    - [Wave 00: Setup and Baseline](./project-docs/wave-00.md)
     - [Wave 01: Setup and Baseline](./project-docs/wave-01.md)
     - [Wave 02: Lifting Up State](./project-docs/wave-02.md)
 - Part 2: Connecting to the Task List API
