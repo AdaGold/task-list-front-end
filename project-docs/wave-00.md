@@ -15,7 +15,7 @@ Use the following steps to get started:
 
 In Wave 00, we will explore the starter code for Task List Front End.
 
-Read through the code in `App.js`, `TaskList.js` and `Task.js` and their style sheets to understand how data and events are being handled. You may use the following questions and suggestions to guide your exploration:
+Read through the code in `App.jsx`, `TaskList.jsx` and `Task.jsx` and their style sheets to understand how data and events are being handled. You may use the following questions and suggestions to guide your exploration:
 
 1. What `props` does `Task` have? Where do they come from?
 1. The `Task` component uses destructuring to read in the props `const Task = ({ id, title, isComplete }) => {...`
