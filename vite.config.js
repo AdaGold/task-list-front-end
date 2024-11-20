@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     reporters: ['verbose'],
-    environments: ['jsdom'],
+    environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.js']
   }
