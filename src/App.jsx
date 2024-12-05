@@ -70,10 +70,10 @@ const App = () => {
       <main>
         <div>
           <TaskList
-              tasks={tasks}
-              onToggleCompleteCallback={updateTask}
-              onDeleteCallback={deleteTask}
-            />
+            tasks={tasks}
+            onToggleCompleteCallback={updateTask}
+            onDeleteCallback={deleteTask}
+          />
         </div>
       </main>
     </div>
