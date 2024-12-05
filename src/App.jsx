@@ -10,7 +10,7 @@ const kBaseUrl = import.meta.env.VITE_BASE_URL;
 
 
 const taskApiToJson = task => {
-  // unpack the fields of a task, renaming is_complete to isComplete in the 
+  // unpack the fields of a task, renaming is_complete to isComplete in the
   // process.
   const { description, id, is_complete: isComplete, title } = task;
 
@@ -27,21 +27,21 @@ const taskApiToJson = task => {
 const getTasksAsync = () => {
   // return the end of the promise chain to allow further then/catch calls
   return axios.get(`${kBaseUrl}/tasks`)
-  .then(response => {
+    .then(response => {
     // convert the received tasks from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson) that will be run on each task
     // in the result.
 
-    // the value we return from a then will become the input to the next then
-    return response.data.map(taskApiToJson);
-  })
-  .catch(err => {
-    console.log(err);
+      // the value we return from a then will become the input to the next then
+      return response.data.map(taskApiToJson);
+    })
+    .catch(err => {
+      console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
-    throw new Error('error fetching tasks');
-  });
+      // anything we throw will skip over any intervening then clauses to become
+      // the input to the next catch clause
+      throw new Error('error fetching tasks');
+    });
 };
 
 // helper function to mark a task complete or incomplete. To do so, we need
@@ -55,20 +55,20 @@ const updateTaskAsync = (id, markComplete) => {
 
   // return the end of the promise chain to allow further then/catch calls
   return axios.patch(`${kBaseUrl}/tasks/${id}/${endpoint}`)
-  .then(response => {
+    .then(response => {
     // convert the received task from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson)
 
-    // the value we return from a then will become the input to the next then
-    return taskApiToJson(response.data.task);
-  })
-  .catch(err => {
-    console.log(err);
+      // the value we return from a then will become the input to the next then
+      return taskApiToJson(response.data.task);
+    })
+    .catch(err => {
+      console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
-    throw new Error(`error updating task ${id}`);
-  });
+      // anything we throw will skip over any intervening then clauses to become
+      // the input to the next catch clause
+      throw new Error(`error updating task ${id}`);
+    });
 };
 
 // helper function to delete a task. This function makes the asynchronous API
@@ -80,13 +80,13 @@ const deleteTaskAsync = id => {
   // response. it returns a status message structure:
   // { "details": "Task 3 \"do the other thing\" successfully deleted" }
   return axios.delete(`${kBaseUrl}/tasks/${id}`)
-  .catch(err => {
-    console.log(err);
+    .catch(err => {
+      console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
-    throw new Error(`error deleting task ${id}`);
-  });
+      // anything we throw will skip over any intervening then clauses to become
+      // the input to the next catch clause
+      throw new Error(`error deleting task ${id}`);
+    });
 };
 
 const addTaskAsync = (taskData) => {
@@ -103,20 +103,20 @@ const addTaskAsync = (taskData) => {
 
   // return the end of the promise chain to allow further then/catch calls
   return axios.post(`${kBaseUrl}/tasks`, body)
-  .then(response => {
+    .then(response => {
     // convert the received task from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson)
 
-    // the value we return from a then will become the input to the next then
-    return taskApiToJson(response.data.task);
-  })
-  .catch(err => {
-    console.log(err);
+      // the value we return from a then will become the input to the next then
+      return taskApiToJson(response.data.task);
+    })
+    .catch(err => {
+      console.log(err);
 
-    // anything we throw will skip over any intervening then clauses to become
-    // the input to the next catch clause
-    throw new Error('error creating task');
-  });
+      // anything we throw will skip over any intervening then clauses to become
+      // the input to the next catch clause
+      throw new Error('error creating task');
+    });
 };
 
 const App = () => {
@@ -132,12 +132,12 @@ const App = () => {
 
   const refreshTasks = () => {
     return getTasksAsync()
-    .then((tasks) => {
-      setTasks(tasks);
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
+      .then((tasks) => {
+        setTasks(tasks);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   };
 
   // use our helper to asynchronously update the specified task, then
@@ -156,26 +156,26 @@ const App = () => {
 
     // start the async task to toggle the completion
     return updateTaskAsync(id, !task.isComplete)
-    .then(newTask => {
+      .then(newTask => {
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
-      setTasks(oldTasks => {
+        setTasks(oldTasks => {
         // return the new value for the tasks state
-        return oldTasks.map(task => {
-          if (task.id === newTask.id) {
+          return oldTasks.map(task => {
+            if (task.id === newTask.id) {
             // if this task is the one we just updated, return the new data we
             // got from the api result to use in the tasks list
-            return newTask;
-          } else {
+              return newTask;
+            } else {
             // otherwise, it's an existing task, so just use it
-            return task;
-          }
+              return task;
+            }
+          });
         });
+      })
+      .catch(err => {
+        console.log(err.message);
       });
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
   };
 
   // use our helper to asynchronously delete the specified task, then
@@ -186,30 +186,30 @@ const App = () => {
 
   const deleteTask = id => {
     return deleteTaskAsync(id)
-    .then(() => {
+      .then(() => {
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
-      setTasks(oldTasks => {
+        setTasks(oldTasks => {
         // return the new value for the tasks state
-        return oldTasks.filter(task => task.id !== id);
+          return oldTasks.filter(task => task.id !== id);
+        });
+      })
+      .catch(err => {
+        console.log(err.message);
       });
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
   };
 
   const addTask = taskData => {
     return addTaskAsync(taskData)
-    .then(task => {
+      .then(task => {
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       // this is very short, so we can use the implied return arrow function
-      setTasks(oldTasks => [ ...oldTasks, task ]);
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
+        setTasks(oldTasks => [...oldTasks, task]);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   };
 
   return (
@@ -220,10 +220,10 @@ const App = () => {
       <main>
         <div>
           <TaskList
-              tasks={tasks}
-              onToggleCompleteCallback={updateTask}
-              onDeleteCallback={deleteTask}
-            />
+            tasks={tasks}
+            onToggleCompleteCallback={updateTask}
+            onDeleteCallback={deleteTask}
+          />
         </div>
         <div>
           <NewTaskForm onAddTaskCallback={addTask} />
