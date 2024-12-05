@@ -2,7 +2,7 @@
 
 **Learn Topics: useEffect and Calling APIs required for this wave**
 
-In Wave 04 we will add the [`axios`](https://github.com/axios/axios) library to our project.  We will use this library to make a request to our API to get the list of tasks.
+In Wave 04 we will add the [`axios`](https://github.com/axios/axios) library to our project.  We will use this library to make a request to our API to get the list of tasks. For this wave you should make sure that that you are on the `main` branch.
 
 When the user deletes or updates a task we will make calls to the API to update the list of tasks.
 
@@ -16,9 +16,7 @@ Create or refactor the following features to connect the Task List Front End to 
 
 ## API Endpoints:
 
-There is an API active on Heroku at [`https://task-list-api-c17.onrender.com/`](https://task-list-api-c17.onrender.com/).
-
-The source code for this Task List API is available on the [`c17/solution` branch](https://github.com/adagold/task-list-api/tree/c17/solution)
+The source code for this Task List API is available on the [`task-list-front-end` branch](https://github.com/AdaAnswers/task-list-api/tree/task-list-front-end)
 
 Detailed specifications for the Task List API can be reviewed in the [Task List API README](https://github.com/adagold/task-list-api/)
 
@@ -38,7 +36,7 @@ We can see a summary of the API endpoints that we will work with for the front e
 
 The deployed Task List API uses the package [`flask-cors`](https://flask-cors.readthedocs.io/en/latest/) to handle Cross Origin Resource Sharing.
 
-The `__init__.py` file uses the `flask-cors` package as viewed [here](https://github.com/AdaGold/task-list-api/blob/c17/solution/app/__init__.py)
+The `__init__.py` file uses the `flask-cors` package as viewed [here](https://github.com/AdaAnswers/task-list-api/tree/task-list-front-end/app/__init__.py)
 
 If you would like to use your Task List API with this project, you will need to make the changes for `flask-cors` in the example below and re-deploy your Task List backend with the updates.
 

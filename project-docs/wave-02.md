@@ -9,7 +9,7 @@ Use the following steps to get started:
 
 ## State & Event Handling
 
-In Wave 02, we will explore the starter code for Task List Front End.
+In Wave 02, we will explore the starter code for Task List Front End. For this wave you should make sure that that you are on the `main` branch.
 
 Read through the code in `App.jsx`, `TaskList.jsx` and `Task.jsx` and their style sheets to understand how data and events are being handled. You may use the following questions and suggestions to guide your exploration:
 
