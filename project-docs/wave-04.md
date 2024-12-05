@@ -2,7 +2,7 @@
 
 **Learn Topics: useEffect and Calling APIs required for this wave**
 
-In Wave 04 we will add the [`axios`](https://github.com/axios/axios) library to our project.  We will use this library to make a request to our API to get the list of tasks.
+In Wave 04 we will add the [`axios`](https://github.com/axios/axios) library to our project.  We will use this library to make a request to our API to get the list of tasks. For this wave you should make sure that that you are on the `main` branch.
 
 When the user deletes or updates a task we will make calls to the API to update the list of tasks.
 
