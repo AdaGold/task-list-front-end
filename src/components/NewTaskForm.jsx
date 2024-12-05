@@ -48,8 +48,8 @@ const NewTaskForm = ({ onAddTaskCallback }) => {
     // using the same handler for title and isComplete, but it's relatively
     // straightforward to deal with here, as long as we don't forget to do it!
     onAddTaskCallback({
-      ...taskData, 
-      isComplete: taskData.isComplete === 'true' 
+      ...taskData,
+      isComplete: taskData.isComplete === 'true'
     });
   };
 
@@ -62,43 +62,43 @@ const NewTaskForm = ({ onAddTaskCallback }) => {
   // a "unique" value that we could concatenate into the control ids so that
   // we could be sure the id was truly unique on the page.
 
-	return (
-		<form onSubmit={handleSubmit} className="new-task__form">
-			<section>
-				<h2>Add a Task</h2>
-				<div className="new-task__fields">
-					<label htmlFor="new-task__title">Title</label>
-					<input
-						name="title"
-						id="new-task__title"
-						value={taskData.title}
-						onChange={handleChange}
-					/>
-					<label htmlFor="new-task__isComplete">Complete</label>
-					<select
-						value={taskData.isComplete}
-						onChange={handleChange}
-						name="isComplete"
-						id="new-task__isComplete"
-					>
-						<option value="true">
+  return (
+    <form onSubmit={handleSubmit} className="new-task__form">
+      <section>
+        <h2>Add a Task</h2>
+        <div className="new-task__fields">
+          <label htmlFor="new-task__title">Title</label>
+          <input
+            name="title"
+            id="new-task__title"
+            value={taskData.title}
+            onChange={handleChange}
+          />
+          <label htmlFor="new-task__isComplete">Complete</label>
+          <select
+            value={taskData.isComplete}
+            onChange={handleChange}
+            name="isComplete"
+            id="new-task__isComplete"
+          >
+            <option value="true">
 							Yes
-						</option>
-						<option value="false">
+            </option>
+            <option value="false">
 							No
-						</option>
-					</select>
-					<button className="button new-task__submit" type="submit">
+            </option>
+          </select>
+          <button className="button new-task__submit" type="submit">
 						Add Task
-					</button>
-				</div>
-			</section>
-		</form>
-	);
+          </button>
+        </div>
+      </section>
+    </form>
+  );
 };
 
 NewTaskForm.propTypes = {
-	onAddTaskCallback: PropTypes.func.isRequired,
+  onAddTaskCallback: PropTypes.func.isRequired,
 };
 
 export default NewTaskForm;

@@ -9,7 +9,7 @@ const kBaseUrl = import.meta.env.VITE_BASE_URL;
 // const kBaseUrl = 'http://localhost:5000';
 
 const taskApiToJson = task => {
-  // unpack the fields of a task, renaming is_complete to isComplete in the 
+  // unpack the fields of a task, renaming is_complete to isComplete in the
   // process.
   const { description, id, is_complete: isComplete, title } = task;
 
@@ -31,7 +31,6 @@ const getTasksAsync = async () => {
     // using a helper function (taskApiToJson) that will be run on each task
     // in the result.
     return response.data.map(taskApiToJson);
-
   } catch (err) {
     console.log(err);
 
@@ -55,7 +54,6 @@ const updateTaskAsync = async (id, markComplete) => {
     // convert the received task from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson)
     return taskApiToJson(response.data.task);
-
   } catch (err) {
     console.log(err);
 
@@ -96,7 +94,6 @@ const addTaskAsync = async taskData => {
     // convert the received task from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson)
     return taskApiToJson(response.data.task);
-
   } catch (err) {
     console.log(err);
 
@@ -171,7 +168,7 @@ const App = () => {
   const deleteTask = async id => {
     try {
       await deleteTaskAsync(id);
-      
+
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       setTasks(oldTasks => {
@@ -190,7 +187,7 @@ const App = () => {
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       // this is very short, so we can use the implied return arrow function
-      setTasks(oldTasks => [ ...oldTasks, task ]);
+      setTasks(oldTasks => [...oldTasks, task]);
     } catch (err) {
       console.log(err.message);
     }
@@ -204,10 +201,10 @@ const App = () => {
       <main>
         <div>
           <TaskList
-              tasks={tasks}
-              onToggleCompleteCallback={updateTask}
-              onDeleteCallback={deleteTask}
-            />
+            tasks={tasks}
+            onToggleCompleteCallback={updateTask}
+            onDeleteCallback={deleteTask}
+          />
         </div>
         <div>
           <NewTaskForm onAddTaskCallback={addTask} />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TaskList from './TaskList';
 
@@ -21,8 +20,8 @@ describe('TaskList Renders', () => {
     render(
       <TaskList
         tasks={tasks}
-        onTaskClickCallback={() => {}}
-        onTaskDeleteCallback={() => {}}
+        onTaskClickCallback={() => { }}
+        onTaskDeleteCallback={() => { }}
       />
     );
 
