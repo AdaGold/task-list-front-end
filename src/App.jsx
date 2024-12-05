@@ -6,7 +6,7 @@ import axios from 'axios';
 const kBaseUrl = 'http://localhost:5000';
 
 const taskApiToJson = task => {
-  // unpack the fields of a task, renaming is_complete to isComplete in the 
+  // unpack the fields of a task, renaming is_complete to isComplete in the
   // process.
   const { description, id, is_complete: isComplete, title } = task;
 
@@ -28,7 +28,7 @@ const getTasksAsync = async () => {
     // convert the received tasks from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson) that will be run on each task
     // in the result.
-  
+
     // the value we return from a then will become the input to the next then
     return response.data.map(taskApiToJson);
   } catch (err) {
@@ -53,10 +53,10 @@ const updateTaskAsync = async (id, markComplete) => {
   try {
     // return the end of the promise chain to allow further then/catch calls
     const response = await axios.patch(`${kBaseUrl}/tasks/${id}/${endpoint}`);
-  
+
     // convert the received task from having python-like keys to JS-like keys
     // using a helper function (taskApiToJson)
-  
+
     // the value we return from a then will become the input to the next then
     return taskApiToJson(response.data.task);
   } catch (err) {
@@ -123,7 +123,7 @@ const App = () => {
     // start the async task to toggle the completion
     try {
       const newTask = await updateTaskAsync(id, !task.isComplete);
-      
+
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       setTasks(oldTasks => {
@@ -154,7 +154,7 @@ const App = () => {
   const deleteTask = async id => {
     try {
       await deleteTaskAsync(id);
-      
+
       // use the callback style of updating the tasks list
       // oldTasks will receive the current contents of the tasks state
       setTasks(oldTasks => {
@@ -174,10 +174,10 @@ const App = () => {
       <main>
         <div>
           <TaskList
-              tasks={tasks}
-              onToggleCompleteCallback={updateTask}
-              onDeleteCallback={deleteTask}
-            />
+            tasks={tasks}
+            onToggleCompleteCallback={updateTask}
+            onDeleteCallback={deleteTask}
+          />
         </div>
       </main>
     </div>

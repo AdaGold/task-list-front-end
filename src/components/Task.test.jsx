@@ -1,7 +1,6 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Task from './Task';
-// import '@testing-library/jest-dom/extend-expect';
 
 describe('Task', () => {
   test('Renders title content', () => {
@@ -11,8 +10,8 @@ describe('Task', () => {
         id={1}
         title={'Test Title'}
         isComplete={true}
-        onClickCallback={() => {}}
-        onDeleteCallback={() => {}}
+        onClickCallback={() => { }}
+        onDeleteCallback={() => { }}
       />
     );
 
@@ -22,8 +21,8 @@ describe('Task', () => {
 
   test.skip('Runs callbacks when buttons clicked', () => {
     // Arrange
-    const clickCallback = jest.fn();
-    const deleteCallback = jest.fn();
+    const clickCallback = vi.fn();
+    const deleteCallback = vi.fn();
 
     // Act
     render(
@@ -54,8 +53,8 @@ describe('Task', () => {
         id={1}
         title={'Test Title'}
         isComplete={true}
-        onClickCallback={() => {}}
-        onDeleteCallback={() => {}}
+        onClickCallback={() => { }}
+        onDeleteCallback={() => { }}
       />
     );
 
@@ -71,8 +70,8 @@ describe('Task', () => {
         id={1}
         title={'Test Title'}
         isComplete={false}
-        onClickCallback={() => {}}
-        onDeleteCallback={() => {}}
+        onClickCallback={() => { }}
+        onDeleteCallback={() => { }}
       />
     );
 
