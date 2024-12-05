@@ -13,7 +13,7 @@ Use the following steps to get started:
 
 ## Baseline
 
-In Wave 01, we will explore the starter code for Task List Front End.
+In Wave 01, we will explore the starter code for Task List Front End. For this wave you should make sure that that you are on the branch called `wave-01`. You might also need to either commit, stash, or abandon any changes made to the `wave-01` branch to be able to switch back to the main branch.
 
 Read through the code in `App.jsx`, `TaskList.jsx` and `Task.jsx` and their style sheets to understand how data and events are being handled. You may use the following questions and suggestions to guide your exploration:
 
