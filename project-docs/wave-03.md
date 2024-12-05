@@ -2,7 +2,7 @@
 
 **Learn Topics: Lifting State Up required for this wave**
 
-In Wave 03 we will update the Task List Front End to store state in the `App`. 
+In Wave 03 we will update the Task List Front End to store state in the `App`. For this wave you should make sure that that you are on the `main` branch. 
 
 Lifting up state will set us up to connect our front end to our back end API. 
 

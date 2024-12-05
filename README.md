@@ -10,6 +10,9 @@ The goals of this pair project are to:
 - Use `axios` to make API calls to update state
 - Write controlled form components
 
+## Forking the Repository
+When forking this repository, be sure to uncheck the button that says: "Copy the `main` branch only"
+
 
 ## Project Directions
 
