@@ -1,5 +1,4 @@
-import React from 'react';
-import TaskList from './components/TaskList.js';
+import TaskList from './components/TaskList.jsx';
 import './App.css';
 
 const TASKS = [
