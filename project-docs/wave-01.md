@@ -9,7 +9,7 @@ Use the following steps to get started:
 1. One team member should fork and clone the repository.
 1. Add other team member(s) as collaborators in GitHub
 1. Run `npm install` to install dependencies.
-1. Run `npm dev` to run the local development server.
+1. Run `npm run dev` to run the local development server.
 
 ## Baseline
 
