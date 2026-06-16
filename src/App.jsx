@@ -1,67 +1,170 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.jsx';
 import './App.css';
-import tasksJson from './data/tasks.json';
+import axios from 'axios';
+
+const kBaseUrl = 'http://localhost:5000';
+
+const taskApiToJson = task => {
+  // unpack the fields of a task, renaming is_complete to isComplete in the
+  // process.
+  const { description, id, is_complete: isComplete, title } = task;
+
+  // reassemble the fields into an object, now with JS-style fields
+  return { description, id, isComplete, title };
+};
+
+// helper function to get all tasks. this function makes the axios call, and
+// unpacks the response data (returning a list of task objects), or throwing
+// a simple error. in order for this to be used from the component, we need to
+// be sure to return the final promise, so that the component can add additional
+// then/catch clauses to update its state or do any additional error handling
+
+const getTasksAsync = () => {
+  // return the end of the promise chain to allow further then/catch calls
+  return axios.get(`${kBaseUrl}/tasks`)
+    .then(response => {
+    // convert the received tasks from having python-like keys to JS-like keys
+    // using a helper function (taskApiToJson) that will be run on each task
+    // in the result.
+
+      // the value we return from a then will become the input to the next then
+      return response.data.map(taskApiToJson);
+    })
+    .catch(err => {
+      console.log(err);
+
+      // anything we throw will skip over any intervening then clauses to become
+      // the input to the next catch clause
+      throw new Error('error fetching tasks');
+    });
+};
+
+// helper function to mark a task complete or incomplete. To do so, we need
+// to know the id of the task being modified, as well as whether we are
+// marking it complete or incomplete. Using that information, we can pick which
+// endpoint to use (since marking complete and incomplete are two different
+// endpoints in task-list).
+
+const updateTaskAsync = (id, markComplete) => {
+  const endpoint = markComplete ? 'mark_complete' : 'mark_incomplete';
+
+  // return the end of the promise chain to allow further then/catch calls
+  return axios.patch(`${kBaseUrl}/tasks/${id}/${endpoint}`)
+    .then(response => {
+    // convert the received task from having python-like keys to JS-like keys
+    // using a helper function (taskApiToJson)
+
+      // the value we return from a then will become the input to the next then
+      return taskApiToJson(response.data.task);
+    })
+    .catch(err => {
+      console.log(err);
+
+      // anything we throw will skip over any intervening then clauses to become
+      // the input to the next catch clause
+      throw new Error(`error updating task ${id}`);
+    });
+};
+
+// helper function to delete a task. This function makes the asynchronous API
+// call using axios to delete the specified task.
+
+const deleteTaskAsync = id => {
+  // return the end of the promise chain to allow further then/catch calls
+  // note no .then here since there's nothing useful for us to process from the
+  // response. it returns a status message structure:
+  // { "details": "Task 3 \"do the other thing\" successfully deleted" }
+  return axios.delete(`${kBaseUrl}/tasks/${id}`)
+    .catch(err => {
+      console.log(err);
+
+      // anything we throw will skip over any intervening then clauses to become
+      // the input to the next catch clause
+      throw new Error(`error deleting task ${id}`);
+    });
+};
 
 const App = () => {
-  const [tasks, setTasks] = useState(tasksJson);
+  const [tasks, setTasks] = useState([]);  // initialize to an empty list of tasks
+
+  // schedule our first refresh to run when the component mounts
+  useEffect(() => {
+    refreshTasks();
+  }, []);
+
+  const refreshTasks = () => {
+    return getTasksAsync()
+      .then((tasks) => {
+        setTasks(tasks);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
+  // use our helper to get the asynchronous list of tasks from axios, then
+  // chain a callback to set our tasks state once we have the result
+
+
+  // use our helper to asynchronously update the specified task, then
+  // chain a callback to set our tasks state once a successful result is
+  // returned. We duplicate the old list of tasks, but replace the task
+  // corresponding to our update with the task value we got back from our
+  // helper.
 
   const updateTask = id => {
-    // create a new list of task data in which the clicked task has its
-    // completion toggled. This approach is _slightly_ unsafe in asynchronous
-    // code, and we may prefer the functional style of setting tasks, which
-    // has the latest state, even if a render hasn't yet happened (see below).
+    // find the task we want to update
+    const task = tasks.find(task => task.id === id);
 
-    const newTasks = tasks.map(task => {
-      if (task.id === id) {
-        return { ...task, isComplete: !task.isComplete };
-      } else {
-        return task;
-      }
-    });
+    // If we didn't find the task for some reason, just return an empty promise
+    // to maintain type compatibility with the main code flow.
+    if (!task) { return Promise.resolve(); }
 
-    setTasks(newTasks);
-
-    // // Alternative functional style set state call
-    // setTasks(oldTasks => {
-    //   // the logic is identical as above, but instead, we return the new value
-    //   // to be used for the state, and the input parameter will be the current
-    //   // state with any pending changes applied, even if the next render hasn't
-    //   // yet occurred.
-
-    //   return oldTasks.map(task => {
-    //     if (task.id === id) {
-    //       return { ...task, isComplete: !task.isComplete };
-    //     } else {
-    //       return task;
-    //     }
-    //   });
-    // });
+    // start the async task to toggle the completion
+    return updateTaskAsync(id, !task.isComplete)
+      .then(newTask => {
+      // use the callback style of updating the tasks list
+      // oldTasks will receive the current contents of the tasks state
+        setTasks(oldTasks => {
+        // return the new value for the tasks state
+          return oldTasks.map(task => {
+            if (task.id === newTask.id) {
+            // if this task is the one we just updated, return the new data we
+            // got from the api result to use in the tasks list
+              return newTask;
+            } else {
+            // otherwise, it's an existing task, so just use it
+              return task;
+            }
+          });
+        });
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   };
+
+  // use our helper to asynchronously delete the specified task, then
+  // chain a callback to set our tasks state once a successful result is
+  // returned. Notice that the input to the .then is empty, since we didn't
+  // return anything from the .then of the helper. But if an error had
+  // occurred, the code would jump over the .then and run the .catch instead
 
   const deleteTask = id => {
-    // create a new list of task data in which the clicked task is removed
-    // from the list. The function given to .filter should return true if that
-    // entry in the list should be kept, and false if it should be excluded. We
-    // want to keep the tasks that _weren't_ clicked, so we return true for the
-    // tasks whose id don't match the clicked task id. As with toggling the
-    // completion, this approach is slightly unsafe for asynchronous code, so
-    // might prefer the functional set state style (see below).
-
-    const newTasks = tasks.filter(task => task.id !== id);
-
-    setTasks(newTasks);
-
-    // // Alternative functional style set state call
-    // setTasks(oldTasks => {
-    //   // the logic is identical as above, but instead, we return the new value
-    //   // to be used for the state, and the input parameter will be the current
-    //   // state with any pending changes applied, even if the next render hasn't
-    //   // yet occurred.
-
-    //   return oldTasks.filter(task => task.id !== id);
-    // });
+    return deleteTaskAsync(id)
+      .then(() => {
+      // use the callback style of updating the tasks list
+      // oldTasks will receive the current contents of the tasks state
+        setTasks(oldTasks => {
+        // return the new value for the tasks state
+          return oldTasks.filter(task => task.id !== id);
+        });
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   };
+
   return (
     <div className="App">
       <header className="App-header">
